@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c0fo0pbrxsdt6"]
+
+[ext_resource type="Script" uid="uid://r7oa6bbaqq6g" path="res://Assets/Test/playerMove.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://dfkk5j4a345vu" path="res://icon.svg" id="2_6t5aa"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpwwm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6t5aa")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
+size = Vector2(129, 127)
+
+[node name="Player" type="Area2D" unique_id=511105942]
+script = ExtResource("1_cvnsp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1319538491]
+sprite_frames = SubResource("SpriteFrames_wpwwm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=107987001]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_wpwwm")
