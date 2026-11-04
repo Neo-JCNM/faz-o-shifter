@@ -17,6 +17,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
 size = Vector2(129, 127)
 
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_wpwwm"]
+
 [node name="Player" type="Area2D" unique_id=511105942]
 script = ExtResource("1_cvnsp")
 
@@ -26,3 +28,6 @@ sprite_frames = SubResource("SpriteFrames_wpwwm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=107987001]
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_wpwwm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CollisionShape2D" unique_id=1637714102]
+stream = SubResource("AudioStreamMP3_wpwwm")
