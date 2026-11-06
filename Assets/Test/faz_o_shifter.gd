@@ -5,7 +5,7 @@ signal faz;
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
-	pass # Replace with function body.
+	top_level = true;
 
 func onBodyStay(_body):
 	if(_body.AnimalShiftSO != null):
