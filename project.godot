@@ -15,9 +15,17 @@ run/main_scene="uid://c3lr2j6uadjf7"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+AlertLevel="*uid://mcq38k30wgv0"
+
 [display]
 
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/vision_cone_2d/plugin.cfg")
 
 [input]
 
@@ -46,6 +54,12 @@ shiftButton={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":178,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_render/layer_1="object"
+2d_render/layer_2="VisionPlayer"
+2d_render/layer_3="EnnemiVision"
 
 [physics]
 
