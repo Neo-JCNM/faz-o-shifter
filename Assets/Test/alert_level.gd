@@ -1,18 +1,26 @@
 extends Node
-@onready var timer = $"./Timer"
+
+var timer = Timer.new()
+
 
 var alert_act = 0
 var aler_max = 2
 
+func _ready():
+	add_child(timer)
+	timer.timeout.connect(_on_timer_timeout)
+	
 func alert_up():
 	alert_act = 1
+	print("===ALERT===")
 	
 func alert_espace():
-	alert_act == 2
+	alert_act = 2
+	print("===ESCAPE===")
+	timer.wait_time = 1.0
+	timer.one_shot = true
 	timer.start()
 
-
-
-
 func _on_timer_timeout() -> void:
-	pass # Replace with function body.
+	alert_act = 0
+	print("===LOST===")
