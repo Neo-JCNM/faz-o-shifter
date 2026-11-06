@@ -23,12 +23,13 @@ size = Vector2(440.00006, 440.00012)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tgd7a"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tgd7a"]
+
 [node name="PigTest" type="Area2D" unique_id=1052418226]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_8u85u")
 shiftData = ExtResource("2_n6bsn")
 speed = 600
-velocity = null
 randomlyWandering = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2027116561]
@@ -44,15 +45,7 @@ shape = SubResource("RectangleShape2D_wpwwm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=707453028]
 shape = SubResource("RectangleShape2D_7qvat")
 
-[node name="Area2D2" type="Area2D" parent="." unique_id=1046288594]
-
-[node name="Polygon2D" type="Polygon2D" parent="Area2D2" unique_id=1224344675]
-modulate = Color(0, 0.84705883, 0.22745098, 0.5019608)
-show_behind_parent = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2" unique_id=838723402]
-
-[node name="VisionCone2D" type="Node2D" parent="Area2D2/CollisionPolygon2D" unique_id=574752831 node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
+[node name="VisionCone2D" type="Node2D" parent="." unique_id=574752831 node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
 modulate = Color(0.25882354, 1, 1, 0.5176471)
 self_modulate = Color(0.4392157, 1, 1, 0.44705883)
 material = SubResource("CanvasItemMaterial_tgd7a")
@@ -61,10 +54,29 @@ script = ExtResource("4_n6bsn")
 angle_deg = 80
 ray_count = 40
 max_distance = 500.0
-collision_layer_mask = 2
-write_collision_polygon = NodePath("..")
-write_polygon2d = NodePath("../../Polygon2D")
+collision_layer_mask = 3
+write_collision_polygon = NodePath("../AreaVision/CollisionPolygon2D")
+write_polygon2d = NodePath("../AreaVision/Polygon2D")
+debug_lines = true
 metadata/_custom_type_script = "uid://bo744wpycscqd"
 
-[connection signal="body_entered" from="Area2D" to="Area2D2/CollisionPolygon2D/VisionCone2D" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
+[node name="AreaVision" type="Area2D" parent="." unique_id=1046288594]
+monitorable = false
+
+[node name="Polygon2D" type="Polygon2D" parent="AreaVision" unique_id=1224344675]
+modulate = Color(0, 0.84705883, 0.22745098, 0.5019608)
+show_behind_parent = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AreaVision" unique_id=838723402]
+light_mask = 3
+visibility_layer = 3
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=1991510288]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=1987184824]
+scale = Vector2(100, 100)
+shape = SubResource("CircleShape2D_tgd7a")
+
+[connection signal="body_entered" from="Area2D" to="VisionCone2D" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="AreaVision" to="." method="_on_area_vision_body_entered"]
+[connection signal="body_exited" from="Area2D2" to="." method="_on_area_2d_2_body_exited"]

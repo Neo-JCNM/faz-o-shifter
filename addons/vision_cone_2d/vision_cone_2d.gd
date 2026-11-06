@@ -9,9 +9,9 @@ class_name VisionCone2D
 ## Total number of rays that will be shot to cover the angle. Will be distributed at equal distances.
 ## This has the biggest impact on performance in the script.
 ## Have this high enough that it is precise, but low enough that it doesn't affect performance
-@export var ray_count: int = 50
+@export var ray_count: int = 75
 ## The maximum length of the rays. Basically how far the character can see
-@export var max_distance: float = 300.
+@export var max_distance: float = 70.
 
 @export_group("Collisions")
 ## What collision layers will block the vision. Have it set to the same layer as your walls, while avoiding things like items or characters
@@ -53,6 +53,14 @@ var _last_redraw_time: int = 0
 @onready var _angle: float = deg_to_rad(angle_deg)
 @onready var _angle_half: float = _angle/2.
 @onready var _angular_delta: float = _angle / ray_count
+func _ready() -> void:
+	# On force l'initialisation des angles (au cas où ils ne sont pas prêts)
+	_angle = deg_to_rad(angle_deg)
+	_angle_half = _angle / 2.
+	_angular_delta = _angle / max(1, ray_count)
+	
+	# On force immédiatement le premier calcul pour éviter le warning de polygone vide
+	recalculate_vision(true)
 
 func _process(_delta: float) -> void:
 	if debug_lines or debug_shape:

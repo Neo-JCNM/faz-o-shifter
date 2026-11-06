@@ -48,8 +48,14 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_area_2d_2_body_entered(body: Node2D) -> void:
+	
+
+
+
+func _on_area_vision_body_entered(body: Node2D) -> void:
 	AlertLevel.alert_up()
 
+
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
-	AlertLevel.alert_up()
+	if AlertLevel.alert_act == 1:
+		AlertLevel.alert_espace()
