@@ -8,6 +8,7 @@ class_name playerMove
 @export var caracteristics :  AnimalShiftSO = null;
 var screenSize;
 signal hit;
+signal move;
 #endregion
 
 #region Main Functions
@@ -15,8 +16,7 @@ signal hit;
 func _ready() -> void:
 	screenSize = get_viewport_rect().size;
 	hide();
-	start(Vector2.ZERO)
-	#connect(faz, shift(caracteristics));
+	start(Vector2.ZERO);
 	
 func start(pos)-> void:
 	position = pos;
@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.play();
 	else:
 		$AnimatedSprite2D.stop();
-	
+	move.emit(velocity*delta);
 	position += velocity * delta;
 	position = position.clamp(Vector2.ZERO, screenSize);
 	
@@ -49,13 +49,10 @@ func onBodyEntered(_body):
 	hide();
 	hit.emit();
 	#$CollisionShape2D.set_deferred("disabled", true);
-	
-#func shift(AnimalShiftSO shifting)-> void:
-	#speed = shifting.speed;
-	#$AnimatedSprite2D.SpriteFrame = 
-	
-	
-	
-	
-	
+
+func _on_faz():
+	speed = caracteristics.speed;
+	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
+	print("Fazing succeeded ! \n");
+
 #endregion
