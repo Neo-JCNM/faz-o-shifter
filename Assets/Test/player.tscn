@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://r7oa6bbaqq6g" path="res://Assets/Test/playerMove.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dfkk5j4a345vu" path="res://icon.svg" id="2_6t5aa"]
 [ext_resource type="Script" uid="uid://ift5ybi70lvv" path="res://Assets/Test/faz_o_shifter.gd" id="3_bs8qf"]
+[ext_resource type="Texture2D" uid="uid://b25ec33g6edib" path="res://Assets/Graphics/Sprites/Square.png" id="4_tyx7g"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wpwwm"]
 animations = [{
@@ -20,7 +21,8 @@ size = Vector2(129, 127)
 
 [sub_resource type="AudioStreamMP3" id="AudioStreamMP3_wpwwm"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wpwwm"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0fky"]
+size = Vector2(256, 254)
 
 [node name="Player" type="Area2D" unique_id=511105942]
 script = ExtResource("1_cvnsp")
@@ -29,14 +31,23 @@ script = ExtResource("1_cvnsp")
 sprite_frames = SubResource("SpriteFrames_wpwwm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=107987001]
+visible = false
 position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_wpwwm")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CollisionShape2D" unique_id=1637714102]
 stream = SubResource("AudioStreamMP3_wpwwm")
 
-[node name="FazOobject" type="Area2D" parent="." unique_id=2017058942]
+[node name="FazOobject" type="Area2D" parent="." unique_id=2017058942 node_paths=PackedStringArray("player")]
+scale = Vector2(0.3, 0.3)
 script = ExtResource("3_bs8qf")
+player = NodePath("..")
 
 [node name="Detect" type="CollisionShape2D" parent="FazOobject" unique_id=2057659432]
-shape = SubResource("CircleShape2D_wpwwm")
+shape = SubResource("RectangleShape2D_m0fky")
+
+[node name="Sprite2D" type="Sprite2D" parent="FazOobject" unique_id=1753835685]
+texture = ExtResource("4_tyx7g")
+
+[connection signal="move" from="." to="FazOobject" method="_on_player_move"]
+[connection signal="faz" from="FazOobject" to="." method="_on_faz"]
