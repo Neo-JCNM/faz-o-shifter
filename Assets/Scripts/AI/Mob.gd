@@ -1,5 +1,6 @@
 extends Area2D
 
+class_name Mob
 #region Main Variables
 @export_group("Data")
 @export var shiftData : AnimalShiftSO = null;
