@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ckbcawebmyki8"]
+
+[sub_resource type="TileSet" id="TileSet_wpwwm"]
+
+[node name="Zone1" type="Node2D" unique_id=770098023]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1825838636]
+tile_set = SubResource("TileSet_wpwwm")
