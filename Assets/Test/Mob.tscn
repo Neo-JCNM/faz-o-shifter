@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c6cedcmgsqj7x" path="res://Assets/Scripts/AI/Mob.gd" id="1_8u85u"]
 [ext_resource type="Resource" uid="uid://dtm5j55dbg2ce" path="res://Assets/Data/ShiftAnimals/Pig.tres" id="2_n6bsn"]
 [ext_resource type="Texture2D" uid="uid://by7g6ruxuownm" path="res://Assets/Test/Graphics/pig.png" id="3_7qvat"]
+[ext_resource type="Script" uid="uid://bo744wpycscqd" path="res://addons/vision_cone_2d/vision_cone_2d.gd" id="4_n6bsn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ljoqd"]
 animations = [{
@@ -18,11 +19,16 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
 size = Vector2(440.00006, 440.00012)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7qvat"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tgd7a"]
+
 [node name="PigTest" type="Area2D" unique_id=1052418226]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_8u85u")
 shiftData = ExtResource("2_n6bsn")
 speed = 600
+velocity = null
 randomlyWandering = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2027116561]
@@ -32,3 +38,33 @@ sprite_frames = SubResource("SpriteFrames_ljoqd")
 position = Vector2(7.748603e-06, -1.4305112e-05)
 scale = Vector2(0.9999995, 0.9999995)
 shape = SubResource("RectangleShape2D_wpwwm")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1617961381]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=707453028]
+shape = SubResource("RectangleShape2D_7qvat")
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=1046288594]
+
+[node name="Polygon2D" type="Polygon2D" parent="Area2D2" unique_id=1224344675]
+modulate = Color(0, 0.84705883, 0.22745098, 0.5019608)
+show_behind_parent = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2" unique_id=838723402]
+
+[node name="VisionCone2D" type="Node2D" parent="Area2D2/CollisionPolygon2D" unique_id=574752831 node_paths=PackedStringArray("write_collision_polygon", "write_polygon2d")]
+modulate = Color(0.25882354, 1, 1, 0.5176471)
+self_modulate = Color(0.4392157, 1, 1, 0.44705883)
+material = SubResource("CanvasItemMaterial_tgd7a")
+use_parent_material = true
+script = ExtResource("4_n6bsn")
+angle_deg = 80
+ray_count = 40
+max_distance = 500.0
+collision_layer_mask = 2
+write_collision_polygon = NodePath("..")
+write_polygon2d = NodePath("../../Polygon2D")
+metadata/_custom_type_script = "uid://bo744wpycscqd"
+
+[connection signal="body_entered" from="Area2D" to="Area2D2/CollisionPolygon2D/VisionCone2D" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
