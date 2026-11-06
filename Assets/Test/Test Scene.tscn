@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c3lr2j6uadjf7"]
+
+[ext_resource type="PackedScene" uid="uid://cx81jfmew6spq" path="res://Assets/Test/Mob.tscn" id="1_kmoty"]
+[ext_resource type="PackedScene" uid="uid://c0fo0pbrxsdt6" path="res://Assets/Test/player.tscn" id="2_af56r"]
+
+[node name="Test Scene" type="Node2D" unique_id=1904270112]
+
+[node name="PigTest" parent="." unique_id=613383613 instance=ExtResource("1_kmoty")]
+position = Vector2(347.99997, 357)
+
+[node name="Player" parent="." unique_id=511105942 instance=ExtResource("2_af56r")]
+position = Vector2(901, 377)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2039484717]
+position = Vector2(577, 325)

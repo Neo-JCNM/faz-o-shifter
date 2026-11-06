@@ -1,8 +1,11 @@
 extends Area2D
+
+class_name playerMove
 #region Variables
 @export_group("Physic")
 @export var speed = 400;
 @export var velocity = Vector2.ZERO;
+@export var caracteristics :  AnimalShiftSO = null;
 var screenSize;
 signal hit;
 #endregion
@@ -13,6 +16,7 @@ func _ready() -> void:
 	screenSize = get_viewport_rect().size;
 	hide();
 	start(Vector2.ZERO)
+	#connect(faz, shift(caracteristics));
 	
 func start(pos)-> void:
 	position = pos;
@@ -44,7 +48,14 @@ func _process(delta: float) -> void:
 func onBodyEntered(_body):
 	hide();
 	hit.emit();
-	$CollisionShape2D.set_deferred("disabled", true);
+	#$CollisionShape2D.set_deferred("disabled", true);
+	
+#func shift(AnimalShiftSO shifting)-> void:
+	#speed = shifting.speed;
+	#$AnimatedSprite2D.SpriteFrame = 
+	
+	
+	
 	
 	
 #endregion

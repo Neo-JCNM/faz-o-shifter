@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cx81jfmew6spq"]
+
+[ext_resource type="Script" uid="uid://c6cedcmgsqj7x" path="res://Assets/Scripts/AI/Mob.gd" id="1_8u85u"]
+[ext_resource type="Resource" uid="uid://dtm5j55dbg2ce" path="res://Assets/Data/ShiftAnimals/Pig.tres" id="2_n6bsn"]
+[ext_resource type="Texture2D" uid="uid://by7g6ruxuownm" path="res://Assets/Test/Graphics/pig.png" id="3_7qvat"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ljoqd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7qvat")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
+size = Vector2(440.00006, 440.00012)
+
+[node name="PigTest" type="Area2D" unique_id=1052418226]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_8u85u")
+shiftData = ExtResource("2_n6bsn")
+speed = 600
+randomlyWandering = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2027116561]
+sprite_frames = SubResource("SpriteFrames_ljoqd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=995291938]
+position = Vector2(7.748603e-06, -1.4305112e-05)
+scale = Vector2(0.9999995, 0.9999995)
+shape = SubResource("RectangleShape2D_wpwwm")

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AnimalShiftSO" format=3 uid="uid://dtm5j55dbg2ce"]
+
+[ext_resource type="Script" uid="uid://ddjmnj8p0jowi" path="res://Assets/Scripts/ScriptableObjects/animalShiftSO.gd" id="1_g85s2"]
+[ext_resource type="Texture2D" uid="uid://by7g6ruxuownm" path="res://Assets/Test/Graphics/pig.png" id="2_p3au7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs8qf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_diktc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_p3au7")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_g85s2")
+animalName = "Pig"
+zoneTag = "Pig Park"
+sprite = SubResource("SpriteFrames_diktc")
+collider = SubResource("RectangleShape2D_bs8qf")
+canRun = false
+canJump = false
+metadata/_custom_type_script = "uid://ddjmnj8p0jowi"
