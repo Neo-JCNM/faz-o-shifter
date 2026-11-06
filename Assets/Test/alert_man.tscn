@@ -4,8 +4,5 @@
 
 [node name="AlertMan" type="Node2D" unique_id=1997906845]
 
-[node name="Timer" type="Timer" parent="." unique_id=545509992]
-wait_time = 15.0
-
 [node name="Node" type="Node" parent="." unique_id=511501112]
 script = ExtResource("1_b0xmx")

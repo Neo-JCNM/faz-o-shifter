@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+AlertMan="*uid://b1w4ac8uei7r5"
 AlertLevel="*uid://mcq38k30wgv0"
 
 [display]

@@ -1,19 +1,21 @@
-extends Area2D
+extends CharacterBody2D
 
 class_name playerMove
 #region Variables
 @export_group("Physic")
 @export var speed = 400;
-@export var velocity = Vector2.ZERO;
+
 @export var caracteristics :  AnimalShiftSO = null;
 var screenSize;
 signal hit;
 signal move;
-#endregion
+#endregiontyy
+
 
 #region Main Functions
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	velocity = Vector2.ZERO;
 	screenSize = get_viewport_rect().size;
 	hide();
 	start(Vector2.ZERO);
