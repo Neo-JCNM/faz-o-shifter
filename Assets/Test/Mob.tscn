@@ -19,18 +19,13 @@ animations = [{
 "speed": 5.0
 }]
 
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
-size = Vector2(440.00006, 440.00012)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qvat"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tgd7a"]
 
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgd7a"]
 
-[node name="PigTest" type="Area2D" unique_id=1052418226]
+[node name="PigTest" type="CharacterBody2D" unique_id=1001888464]
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_8u85u")
 shiftData = ExtResource("2_n6bsn")
@@ -45,8 +40,7 @@ shape = SubResource("RectangleShape2D_wpwwm")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2027116561]
 sprite_frames = SubResource("SpriteFrames_ljoqd")
 
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=995291938]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=995291938]
 position = Vector2(7.748603e-06, -1.4305112e-05)
 scale = Vector2(0.9999995, 0.9999995)
 shape = SubResource("RectangleShape2D_wpwwm")
@@ -71,7 +65,6 @@ write_polygon2d = NodePath("../AreaVision/Polygon2D")
 debug_lines = true
 metadata/_custom_type_script = "uid://bo744wpycscqd"
 
-
 [node name="AreaVision" type="Area2D" parent="." unique_id=1046288594]
 monitorable = false
 
@@ -92,4 +85,3 @@ shape = SubResource("CircleShape2D_tgd7a")
 [connection signal="body_entered" from="Area2D" to="VisionCone2D" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="AreaVision" to="." method="_on_area_vision_body_entered"]
 [connection signal="body_exited" from="Area2D2" to="." method="_on_area_2d_2_body_exited"]
-

@@ -3,8 +3,7 @@ extends Node
 var timer = Timer.new()
 
 
-var alert_act = 0
-var aler_max = 2
+@onready var alert_act = 0
 
 func _ready():
 	add_child(timer)

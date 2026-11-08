@@ -1,6 +1,6 @@
 extends Area2D
 @export var fazable : bool = false;
-@export var fazTarget : Area2D = null;
+@export var fazTarget : CharacterBody2D = null;
 
 signal faz;
 @export var player : playerMove = null;
@@ -25,7 +25,7 @@ func _on_player_move(value: Vector2) -> void:
 	position = position.clamp(Vector2.ZERO, player.screenSize);
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(area: CharacterBody2D) -> void:
 	print("=== INSIDE ===\n")
 	fazable = true
 	if(area is Mob):

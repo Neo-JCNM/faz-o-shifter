@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 class_name Mob
 #region Main Variables
@@ -6,11 +6,12 @@ class_name Mob
 @export var shiftData : AnimalShiftSO = null;
 
 @export_group("Physic")
-@export var speed : int = 200;
-@export var velocity : Vector2 = Vector2.ZERO;
+@export var speed : int = 100;
+
 
 @export_group("Basic Behaviour")
 @export var randomlyWandering : bool = false;
+@onready var player = get_tree().get_first_node_in_group("player")
 
 var screenSize;
 var counter  = 0;
@@ -32,26 +33,29 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#if randomlyWandering:
-		#if counter >= 240:
-			#counter -= 240
-			#randomDirection();
-		#if velocity.length() > 0:
-			#velocity = velocity.normalized() * speed;
-			#$AnimatedSprite2D.play();
-		#else:
-			#$AnimatedSprite2D.stop();
-		#position += velocity * delta;
-		#position = position.clamp(Vector2.ZERO, screenSize);
-		#counter += randi()%20+1;
-		#velocity = Vector2.ZERO;
-	pass
-
-
-	
-
-
+func _physics_process(delta: float) -> void:
+	if AlertLevel.alert_act == 0:
+		if counter >= 240:
+			counter -= 240
+			randomDirection();
+		if velocity.length() > 0:
+			velocity = velocity.normalized() * speed;
+			$AnimatedSprite2D.play();
+		else:
+			$AnimatedSprite2D.stop();
+		position += velocity * delta;
+		position = position.clamp(Vector2.ZERO, screenSize);
+		counter += randi()%20+1;
+		velocity = Vector2.ZERO;
+	else:
+		if not is_instance_valid(player):
+			player = get_tree().get_first_node_in_group("player")
+			print("player not found")
+		if is_instance_valid(player):
+			var direction = global_position.direction_to(player.global_position)
+			velocity = direction * 100
+			move_and_slide()
+			print("player found")
 
 func _on_area_vision_body_entered(body: Node2D) -> void:
 	AlertLevel.alert_up()
@@ -60,3 +64,4 @@ func _on_area_vision_body_entered(body: Node2D) -> void:
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
 	if AlertLevel.alert_act == 1:
 		AlertLevel.alert_espace()
+		
