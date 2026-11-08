@@ -16,9 +16,9 @@ animations = [{
 "speed": 5.0
 }]
 
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
 size = Vector2(440.00006, 440.00012)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7qvat"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tgd7a"]
@@ -27,7 +27,6 @@ size = Vector2(440.00006, 440.00012)
 radius = 14.809132
 
 [node name="PigTest" type="CharacterBody2D" unique_id=1001888464]
-
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_8u85u")
 shiftData = ExtResource("2_n6bsn")
@@ -55,7 +54,7 @@ use_parent_material = true
 script = ExtResource("4_n6bsn")
 angle_deg = 80
 ray_count = 40
-max_distance = 500.0
+max_distance = 300.0
 collision_layer_mask = 3
 write_collision_polygon = NodePath("../AreaVision/CollisionPolygon2D")
 write_polygon2d = NodePath("../AreaVision/Polygon2D")

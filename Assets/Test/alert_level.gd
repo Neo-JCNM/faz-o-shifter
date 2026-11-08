@@ -21,5 +21,6 @@ func alert_espace():
 	timer.start()
 
 func _on_timer_timeout() -> void:
-	alert_act = 0
-	print("===LOST===")
+	if alert_act != 1:
+		alert_act = 0
+		print("===LOST===")
