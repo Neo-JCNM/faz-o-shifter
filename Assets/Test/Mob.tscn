@@ -24,6 +24,7 @@ animations = [{
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tgd7a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tgd7a"]
+radius = 14.809132
 
 [node name="PigTest" type="CharacterBody2D" unique_id=1001888464]
 scale = Vector2(0.25, 0.25)

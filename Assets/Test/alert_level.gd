@@ -16,7 +16,7 @@ func alert_up():
 func alert_espace():
 	alert_act = 2
 	print("===ESCAPE===")
-	timer.wait_time = 1.0
+	timer.wait_time = 3
 	timer.one_shot = true
 	timer.start()
 

@@ -7,6 +7,7 @@ class_name Mob
 
 @export_group("Physic")
 @export var speed : int = 100;
+@export var rotation_speed : int = 5
 
 
 @export_group("Basic Behaviour")
@@ -28,6 +29,7 @@ func randomDirection()-> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AlertLevel.alert_act = 0
 	screenSize = get_viewport_rect().size;
 	counter = 0;
 
@@ -50,12 +52,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		if not is_instance_valid(player):
 			player = get_tree().get_first_node_in_group("player")
-			print("player not found")
 		if is_instance_valid(player):
 			var direction = global_position.direction_to(player.global_position)
 			velocity = direction * 100
+			var rotation_direction =direction.angle() - PI/2
+			rotation = lerp_angle(rotation, rotation_direction, 0.1)
 			move_and_slide()
-			print("player found")
 
 func _on_area_vision_body_entered(body: Node2D) -> void:
 	AlertLevel.alert_up()
