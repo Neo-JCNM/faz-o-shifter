@@ -15,6 +15,7 @@ func _process(delta: float) -> void:
 	if(Input.is_action_pressed("shiftButton") and (fazable) and fazTarget != null):
 			print("fazing...\n");
 			player.caracteristics = fazTarget.shiftData;
+			print("fazed!\n");
 			faz.emit();
 	
 
@@ -25,14 +26,15 @@ func _on_player_move(value: Vector2) -> void:
 	position = position.clamp(Vector2.ZERO, player.screenSize);
 
 
-func _on_area_entered(area: CharacterBody2D) -> void:
+func _on_body_entered(body: Node2D) -> void:
 	print("=== INSIDE ===\n")
 	fazable = true
-	if(area is Mob):
-		fazTarget = area;
+	if(body is Mob):
+		print("détection cible...\n");
+		fazTarget = body;
 
 
-func _on_area_exited(area: Area2D) -> void:
+func _on_body_exited(body: Node2D) -> void:
 	print("=== OUTSIDE ===\n")
 	fazable = false
 	fazTarget = null;

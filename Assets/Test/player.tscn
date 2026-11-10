@@ -52,5 +52,5 @@ shape = SubResource("RectangleShape2D_m0fky")
 texture = ExtResource("4_tyx7g")
 
 [connection signal="move" from="." to="FazOobject" method="_on_player_move"]
-[connection signal="area_entered" from="FazOobject" to="FazOobject" method="_on_area_entered"]
-[connection signal="area_exited" from="FazOobject" to="FazOobject" method="_on_area_exited"]
+[connection signal="body_entered" from="FazOobject" to="FazOobject" method="_on_body_entered"]
+[connection signal="body_exited" from="FazOobject" to="FazOobject" method="_on_body_exited"]
