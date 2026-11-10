@@ -5,7 +5,12 @@ class_name playerMove
 #region Variables
 @export_group("Physic")
 @export var speed = 400;
+
+@export_group("Data")
 @export var caracteristics :  AnimalShiftSO = null;
+@export var baseCaracteristics :  AnimalShiftSO = null;
+@export var timer : Timer = null;
+
 var screenSize;
 signal hit;
 signal move;
@@ -20,6 +25,7 @@ func _ready() -> void:
 	screenSize = get_viewport_rect().size;
 	hide();
 	start(Vector2.ZERO);
+	caracteristics = baseCaracteristics
 	
 func start(pos)-> void:
 	position = pos;
@@ -28,6 +34,8 @@ func start(pos)-> void:
 	$CollisionShape2D.disabled = false;
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	print("timer = ",timer.wait_time)
 	velocity = Vector2.ZERO;
 	
 	if Input.is_action_pressed("moveRight"):
@@ -57,5 +65,15 @@ func _on_faz():
 	speed = caracteristics.speed;
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 	print("Fazing succeeded ! \n");
+	if(caracteristics.shiftDuration > 0):
+		timer.start(caracteristics.shiftDuration)
+	else: timer.wait_time = 0
+	
+func _on_timer_timeout() -> void:
+	caracteristics = baseCaracteristics;
+	speed = caracteristics.speed;
+	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
+
+
 
 #endregion

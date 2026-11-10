@@ -20,6 +20,7 @@ animations = [{
 script = ExtResource("1_g85s2")
 animalName = "Pig"
 zoneTag = "Pig Park"
+shiftDuration = 10.0
 sprite = SubResource("SpriteFrames_diktc")
 collider = SubResource("RectangleShape2D_bs8qf")
 canRun = false

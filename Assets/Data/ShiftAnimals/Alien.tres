@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="AnimalShiftSO" format=3 uid="uid://b4kndojicnw8r"]
+
+[ext_resource type="Script" uid="uid://ddjmnj8p0jowi" path="res://Assets/Scripts/ScriptableObjects/animalShiftSO.gd" id="1_ovqdt"]
+[ext_resource type="Texture2D" uid="uid://dfkk5j4a345vu" path="res://icon.svg" id="2_561se"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k04eo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_561se"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_561se")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_ovqdt")
+animalName = "Alien"
+zoneTag = "?"
+shiftDuration = -1.0
+sprite = SubResource("SpriteFrames_561se")
+collider = SubResource("RectangleShape2D_k04eo")
+canCrouch = true
+canJump = false
+metadata/_custom_type_script = "uid://ddjmnj8p0jowi"

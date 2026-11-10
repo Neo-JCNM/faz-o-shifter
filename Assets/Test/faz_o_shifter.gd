@@ -3,6 +3,7 @@ extends Area2D
 @export var fazTarget : CharacterBody2D = null;
 
 signal faz;
+
 @export var player : playerMove = null;
 # Called when the node enters the scene tree for the first time.
 
