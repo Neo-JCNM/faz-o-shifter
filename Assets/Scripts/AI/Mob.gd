@@ -61,7 +61,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_vision_body_entered(body: Node2D) -> void:
 	print(player.fazed)
-	if not player.fazed:
+	if not player.caracteristics == shiftData:
 		AlertLevel.alert_up()
 
 
