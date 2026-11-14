@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name Mob
 #region Main Variables
+@export var patrol : PathFollow2D 
+
 @export_group("Data")
 @export var shiftData : AnimalShiftSO = null;
 
@@ -16,8 +18,8 @@ class_name Mob
 
 var screenSize;
 var counter  = 0;
-
-
+var last_post: Vector2
+var return_pat
 #region Test Function
 func randomDirection()-> void:
 	var choice = randi()%3;
@@ -32,35 +34,40 @@ func _ready() -> void:
 	AlertLevel.alert_act = 0
 	screenSize = get_viewport_rect().size;
 	counter = 0;
+	patrol.rotates = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	var direction
+	var rotation_direction
 	if AlertLevel.alert_act == 0:
-		if counter >= 240:
-			counter -= 240
-			randomDirection();
-		if velocity.length() > 0:
-			velocity = velocity.normalized() * speed;
-			$AnimatedSprite2D.play();
+		if return_pat:
+			direction = patrol.global_position
+			if global_position.distance_to(direction) > 5.0:
+				velocity = global_position.direction_to(direction) * 100
+			else:
+				return_pat = false
 		else:
-			$AnimatedSprite2D.stop();
-		position += velocity * delta;
-		position = position.clamp(Vector2.ZERO, screenSize);
-		counter += randi()%20+1;
-		velocity = Vector2.ZERO;
+			patrol.progress += 100 * delta
+			direction = patrol.global_position
+			velocity = (direction - global_position) / delta
+		move_and_slide()
+		rotation_direction = (global_position - last_post).angle() - PI/2
+		rotation = lerp_angle(rotation, rotation_direction, 25 * delta)
+		last_post = global_position
 	else:
+		return_pat = true
 		if not is_instance_valid(player):
 			player = get_tree().get_first_node_in_group("player")
 		if is_instance_valid(player):
-			var direction = global_position.direction_to(player.global_position)
+			direction = global_position.direction_to(player.global_position)
 			velocity = direction * 100
-			var rotation_direction =direction.angle() - PI/2
+			rotation_direction =direction.angle() - PI/2
 			rotation = lerp_angle(rotation, rotation_direction, 0.1)
 			move_and_slide()
 
 func _on_area_vision_body_entered(body: Node2D) -> void:
-	print(player.fazed)
 	if not player.caracteristics == shiftData:
 		AlertLevel.alert_up()
 

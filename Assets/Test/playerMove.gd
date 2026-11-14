@@ -22,6 +22,7 @@ var timer = Timer.new();
 #region Main Functions
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	AlertLevel.alert_act = 0
 	screenSize = get_viewport_rect().size;
 	hide();
 	start(Vector2.ZERO);
