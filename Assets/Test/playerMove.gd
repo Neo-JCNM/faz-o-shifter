@@ -9,11 +9,11 @@ class_name playerMove
 @export_group("Data")
 @export var caracteristics :  AnimalShiftSO = null;
 @export var baseCaracteristics :  AnimalShiftSO = null;
-@export var timer : Timer = null;
-
 var screenSize;
+var fazed
 signal hit;
 signal move;
+var timer = Timer.new();
 
 #endregiontyy
 
@@ -35,9 +35,9 @@ func start(pos)-> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	print("timer = ",timer.wait_time)
 	velocity = Vector2.ZERO;
-	
+	if fazed :
+		print("timer", timer.time_left)
 	if Input.is_action_pressed("moveRight"):
 		velocity.x += 1;
 	if Input.is_action_pressed("moveLeft"):
@@ -63,10 +63,13 @@ func onBodyEntered(_body):
 
 func _on_faz():
 	speed = caracteristics.speed;
+	fazed = true
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 	print("Fazing succeeded ! \n");
 	if(caracteristics.shiftDuration > 0):
-		timer.start(caracteristics.shiftDuration)
+		timer.wait_time = caracteristics.shiftDuration
+		timer.one_shot = true
+		timer.start()
 	else: timer.wait_time = 0
 	
 func _on_timer_timeout() -> void:
