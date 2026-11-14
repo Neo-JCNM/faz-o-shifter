@@ -73,6 +73,7 @@ func _on_faz():
 	else: timer.wait_time = 0
 	
 func _on_timer_timeout() -> void:
+	fazed = false
 	caracteristics = baseCaracteristics;
 	speed = caracteristics.speed;
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;

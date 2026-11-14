@@ -60,7 +60,9 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 
 func _on_area_vision_body_entered(body: Node2D) -> void:
-	AlertLevel.alert_up()
+	print(player.fazed)
+	if not player.fazed:
+		AlertLevel.alert_up()
 
 
 func _on_area_2d_2_body_exited(body: Node2D) -> void:
