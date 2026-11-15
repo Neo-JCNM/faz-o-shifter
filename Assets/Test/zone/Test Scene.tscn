@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c3lr2j6uadjf7"]
 
+[ext_resource type="PackedScene" uid="uid://v2je86htbedh" path="res://Assets/Test/object/door.tscn" id="1_lm5rs"]
 [ext_resource type="PackedScene" uid="uid://c0fo0pbrxsdt6" path="res://Assets/Test/player.tscn" id="1_uj615"]
 [ext_resource type="PackedScene" uid="uid://cx81jfmew6spq" path="res://Assets/Test/Mob.tscn" id="2_rj1cu"]
 [ext_resource type="PackedScene" uid="uid://dwel8ipaoo1xk" path="res://Assets/Test/object/hiding_spot.tscn" id="3_lm5rs"]
@@ -41,3 +42,10 @@ light_mask = 5
 visibility_layer = 7
 position = Vector2(46.00006, 285)
 scale = Vector2(1.2, 1.2)
+
+[node name="Door" parent="." unique_id=1936585187 instance=ExtResource("1_lm5rs")]
+position = Vector2(257.00012, 646.99994)
+rotation = -1.5707964
+closed = false
+id_key_needed = 0
+scene_end = "uid://ckbcawebmyki8"

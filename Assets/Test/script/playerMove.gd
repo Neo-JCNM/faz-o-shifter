@@ -23,16 +23,23 @@ var timer = Timer.new();
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	AlertLevel.alert_act = 0
-	screenSize = get_viewport_rect().size;
+	screenSize = get_camera_rect()
 	hide();
 	start(Vector2.ZERO);
 	caracteristics = baseCaracteristics
 	
+func get_camera_rect() -> Rect2:
+	var cam = get_viewport().get_camera_2d()
+	var size = get_viewport_rect().size / cam.zoom
+	var center = cam.get_screen_center_position()
+	return Rect2(center - size / 2.0, size)
+
 func start(pos)-> void:
 	position = pos;
-	position.clamp(Vector2.ZERO, screenSize);
+	position.clamp(screenSize.position, screenSize.end);
 	show();
 	$CollisionShape2D.disabled = false;
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	velocity = Vector2.ZERO;
@@ -54,7 +61,7 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.stop();
 	move.emit(velocity*delta);
 	position += velocity * delta;
-	position = position.clamp(Vector2.ZERO, screenSize);
+	position = position.clamp(screenSize.position, screenSize.end);
 	if AlertLevel.is_hiding:
 		visible = false
 	else: 

@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 func _on_player_move(value: Vector2) -> void:
 	position -= value;
 	#print("compensing...\n");
-	position = position.clamp(Vector2.ZERO, player.screenSize);
+	position = position.clamp(player.screenSize.position, player.screenSize.end);
 
 
 func _on_body_entered(body: Node2D) -> void:

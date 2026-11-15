@@ -2,16 +2,37 @@
 
 [ext_resource type="PackedScene" uid="uid://c0fo0pbrxsdt6" path="res://Assets/Test/player.tscn" id="1_ulhmy"]
 [ext_resource type="PackedScene" uid="uid://cx81jfmew6spq" path="res://Assets/Test/Mob.tscn" id="2_kyc0r"]
+[ext_resource type="PackedScene" uid="uid://v2je86htbedh" path="res://Assets/Test/object/door.tscn" id="3_kyc0r"]
+
+[sub_resource type="Curve2D" id="Curve2D_jywrb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 888, 464, 0, 0, 0, 0, 1454, 430, 0, 0, 0, 0, 1587, 920, 0, 0, 0, 0, 1040, 1109, 0, 0, 0, 0, 466, 866, 0, 0, 0, 0, 888, 460)
+}
+point_count = 6
 
 [node name="Zone1" type="Node2D" unique_id=770098023]
-position = Vector2(331, 16)
 
 [node name="Player" parent="." unique_id=1684749387 instance=ExtResource("1_ulhmy")]
 position = Vector2(1882, 654)
 
-[node name="PigTest" parent="." unique_id=1001888464 instance=ExtResource("2_kyc0r")]
+[node name="PigTest" parent="." unique_id=1001888464 node_paths=PackedStringArray("patrol") instance=ExtResource("2_kyc0r")]
 position = Vector2(133, 417)
+patrol = NodePath("../Path2D/PathFollow2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=318512505]
-position = Vector2(821, 634)
+position = Vector2(1151, 645)
 zoom = Vector2(0.5, 0.5)
+
+[node name="Door" parent="." unique_id=1936585187 instance=ExtResource("3_kyc0r")]
+position = Vector2(923, 0)
+rotation = 1.5707964
+closed = false
+id_key_needed = 0
+scene_end = "uid://c3lr2j6uadjf7"
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1570313829]
+curve = SubResource("Curve2D_jywrb")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=1537474975]
+position = Vector2(888, 464)
+rotation = -0.059998572
