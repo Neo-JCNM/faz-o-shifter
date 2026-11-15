@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ckbcawebmyki8"]
+
+[ext_resource type="PackedScene" uid="uid://c0fo0pbrxsdt6" path="res://Assets/Test/player.tscn" id="1_ulhmy"]
+[ext_resource type="PackedScene" uid="uid://cx81jfmew6spq" path="res://Assets/Test/Mob.tscn" id="2_kyc0r"]
+
+[node name="Zone1" type="Node2D" unique_id=770098023]
+position = Vector2(331, 16)
+
+[node name="Player" parent="." unique_id=1684749387 instance=ExtResource("1_ulhmy")]
+position = Vector2(1882, 654)
+
+[node name="PigTest" parent="." unique_id=1001888464 instance=ExtResource("2_kyc0r")]
+position = Vector2(133, 417)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=318512505]
+position = Vector2(821, 634)
+zoom = Vector2(0.5, 0.5)

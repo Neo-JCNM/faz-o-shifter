@@ -35,7 +35,6 @@ func start(pos)-> void:
 	$CollisionShape2D.disabled = false;
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
 	velocity = Vector2.ZERO;
 	if fazed :
 		print("timer", timer.time_left)
@@ -56,7 +55,12 @@ func _process(delta: float) -> void:
 	move.emit(velocity*delta);
 	position += velocity * delta;
 	position = position.clamp(Vector2.ZERO, screenSize);
-	
+	if AlertLevel.is_hiding:
+		visible = false
+	else: 
+		visible = true
+		
+
 func onBodyEntered(_body):
 	hide();
 	hit.emit();
