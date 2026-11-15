@@ -2,12 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://cx81jfmew6spq" path="res://Assets/Test/Mob.tscn" id="1_kmoty"]
 [ext_resource type="PackedScene" uid="uid://c0fo0pbrxsdt6" path="res://Assets/Test/player.tscn" id="2_af56r"]
+[ext_resource type="PackedScene" uid="uid://dwel8ipaoo1xk" path="res://Assets/Test/hiding_spot.tscn" id="3_af56r"]
 
 [sub_resource type="Curve2D" id="Curve2D_kmoty"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -657.3833, 59.530457, 0, 0, 0, 0, -649.00006, -233.99988, 0, 0, 0, 0, -81.575195, -232.31033, 0, 0, 0, 0, -89.66437, 75.86209, 0, 0, 0, 0, -654.4418, 59.530457)
+"points": PackedVector2Array(0, 0, 0, 0, -657.3833, 59.530457, 0, 0, 0, 0, -649.00006, -233.99988, 0, 0, 0, 0, -474.01392, -222.3692, 0, 0, 0, 0, -81.575195, -232.31033, 0, 0, 0, 0, -89.66437, 75.86209, 0, 0, 0, 0, -654.4418, 59.530457)
 }
-point_count = 5
+point_count = 6
 
 [node name="Test Scene" type="Node2D" unique_id=1904270112]
 rotation = 6.2831855
@@ -19,18 +20,24 @@ position = Vector2(95, 72)
 position = Vector2(576.00006, 323.9999)
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1591201306]
-position = Vector2(1160.9282, 482.16306)
-scale = Vector2(1.3598278, 1.4083025)
+position = Vector2(1116.2039, 482.16306)
+scale = Vector2(0.81156826, 1.4083025)
 curve = SubResource("Curve2D_kmoty")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=153031423]
-position = Vector2(-85.17864, -95.03001)
+position = Vector2(-85.16526, -95.53978)
 rotation = 1.5970391
 progress = 998.4054
 
 [node name="PigTest" parent="." unique_id=613383613 node_paths=PackedStringArray("patrol") instance=ExtResource("1_kmoty")]
-position = Vector2(738.00006, 152.99992)
+position = Vector2(885.99994, 175.99985)
 rotation = 1.5961362
 scale = Vector2(0.21124047, 0.20397925)
 skew = 0.0018378496
 patrol = NodePath("../Path2D/PathFollow2D")
+
+[node name="HidingSpot" parent="." unique_id=662818426 instance=ExtResource("3_af56r")]
+light_mask = 5
+visibility_layer = 7
+position = Vector2(46.00006, 285)
+scale = Vector2(1.2, 1.2)

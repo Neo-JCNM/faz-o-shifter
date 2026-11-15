@@ -16,6 +16,7 @@ class_name Mob
 @export var randomlyWandering : bool = false;
 @onready var player = get_tree().get_first_node_in_group("player")
 
+
 var screenSize;
 var counter  = 0;
 var last_post: Vector2
@@ -65,10 +66,10 @@ func _physics_process(delta: float) -> void:
 			velocity = direction * 100
 			rotation_direction =direction.angle() - PI/2
 			rotation = lerp_angle(rotation, rotation_direction, 0.1)
-			move_and_slide()
+			move_and_collide(velocity * delta)
 
 func _on_area_vision_body_entered(body: Node2D) -> void:
-	if not player.caracteristics == shiftData:
+	if not player.caracteristics == shiftData and body is playerMove and not AlertLevel.is_hiding:
 		AlertLevel.alert_up()
 
 
