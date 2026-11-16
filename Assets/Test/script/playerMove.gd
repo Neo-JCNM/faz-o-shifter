@@ -15,7 +15,7 @@ signal hit;
 signal move;
 var timer = Timer.new();
 
-#endregiontyy
+#endregion
 
 
 
@@ -42,6 +42,7 @@ func start(pos)-> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	print(caracteristics.shiftDuration)
 	velocity = Vector2.ZERO;
 	if fazed :
 		print("timer", timer.time_left)
@@ -66,6 +67,14 @@ func _process(delta: float) -> void:
 		visible = false
 	else: 
 		visible = true
+	
+	if(fazed || caracteristics.shiftDuration > 0):
+		caracteristics.shiftDuration -= 1 * delta
+	if(caracteristics.shiftDuration <= 0):
+		fazed = false
+		caracteristics = baseCaracteristics;
+		speed = caracteristics.speed;
+		$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 		
 
 func onBodyEntered(_body):
@@ -78,17 +87,7 @@ func _on_faz():
 	fazed = true
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 	print("Fazing succeeded ! \n");
-	if(caracteristics.shiftDuration > 0):
-		timer.wait_time = caracteristics.shiftDuration
-		timer.one_shot = true
-		timer.start()
-	else: timer.wait_time = 0
 	
-func _on_timer_timeout() -> void:
-	fazed = false
-	caracteristics = baseCaracteristics;
-	speed = caracteristics.speed;
-	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 
 
 
