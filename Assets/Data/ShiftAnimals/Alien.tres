@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://ddjmnj8p0jowi" path="res://Assets/Scripts/ScriptableObjects/animalShiftSO.gd" id="1_ovqdt"]
 [ext_resource type="Texture2D" uid="uid://dmhfmgemcuwip" path="res://Assets/Graphics/Sprites/Alien/Alien.png" id="2_561se"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k04eo"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4gms"]
+size = Vector2(100, 121)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rtibo"]
 animations = [{
@@ -22,7 +23,7 @@ animalName = "Alien"
 zoneTag = "?"
 shiftDuration = -1.0
 sprite = SubResource("SpriteFrames_rtibo")
-collider = SubResource("RectangleShape2D_k04eo")
+collider = SubResource("RectangleShape2D_l4gms")
 canCrouch = true
 canJump = false
 metadata/_custom_type_script = "uid://ddjmnj8p0jowi"

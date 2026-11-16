@@ -10,24 +10,38 @@ class_name playerMove
 @export var caracteristics :  AnimalShiftSO = null;
 var shiftCount;
 @export var baseCaracteristics :  AnimalShiftSO = null;
-@export var cooldown = 5.0
+@export var cooldown = 5
 var screenSize;
 var fazed
 signal hit;
 signal move;
+var timer = Timer.new();
+var timer_cooldown = Timer.new()
+var cooldown_started : bool
+@onready var Doors = get_tree().get_nodes_in_group("doors")
 
 #endregion
-
 
 
 #region Main Functions
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	cooldown_started = false
+	add_child(timer)
+	add_child(timer_cooldown)
+	timer_cooldown.timeout.connect(_on_timer_cooldown_timeout)
 	AlertLevel.alert_act = 0
 	screenSize = get_camera_rect()
 	hide();
-	start(Vector2.ZERO);
+	SceneMan.doors = Doors
+	start();
+	if SceneMan.first_spawn:
+		print(Doors)
+		position = SceneMan._update_door().global_position
+	else: 
+		position = Vector2.ZERO
 	caracteristics = baseCaracteristics
+	
 	
 func get_camera_rect() -> Rect2:
 	var cam = get_viewport().get_camera_2d()
@@ -35,8 +49,7 @@ func get_camera_rect() -> Rect2:
 	var center = cam.get_screen_center_position()
 	return Rect2(center - size / 2.0, size)
 
-func start(pos)-> void:
-	position = pos;
+func start()-> void:
 	position.clamp(screenSize.position, screenSize.end);
 	show();
 	$CollisionShape2D.disabled = false;
@@ -60,16 +73,21 @@ func _physics_process(delta: float) -> void:
 	move.emit(velocity*delta);
 	position += velocity * delta;
 	position = position.clamp(screenSize.position, screenSize.end);
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#print(caracteristics.shiftDuration)
+	if SceneMan.on_cooldown and not cooldown_started:
+		timer_cooldown.wait_time = cooldown
+		timer_cooldown.one_shot = true
+		timer_cooldown.start()
+		cooldown_started = true
 	print(cooldown)
 	cooldown -= 1 * delta
 	if AlertLevel.is_hiding:
 		visible = false
 	else: 
 		visible = true
-	
 	if(fazed):
 		if(shiftCount > 0):
 			shiftCount -= 1 * delta
@@ -78,7 +96,8 @@ func _process(delta: float) -> void:
 			caracteristics = baseCaracteristics;
 			speed = caracteristics.speed;
 			$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
-		
+			
+	# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func onBodyEntered(_body):
 	hide();
@@ -94,7 +113,23 @@ func _on_faz():
 	fazed = true
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 	print("Fazing succeeded ! \n");
+	if not SceneMan.on_cooldown:
+		timer.wait_time = caracteristics.shiftDuration
+		timer.one_shot = true
+		timer.start()
+	else: timer.wait_time = 0
 	
+func _on_timer_timeout() -> void:
+	fazed = false
+	SceneMan.on_cooldown = true
+	caracteristics = baseCaracteristics;
+	speed = caracteristics.speed;
+	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
+	
+func _on_timer_cooldown_timeout() -> void:
+	SceneMan.on_cooldown = false
+	cooldown_started = false
+	print("Off cooldown",SceneMan.on_cooldown)
 
 
 

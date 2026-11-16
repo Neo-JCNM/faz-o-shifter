@@ -6,7 +6,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_jywrb"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 888, 464, 0, 0, 0, 0, 1454, 430, 0, 0, 0, 0, 1587, 920, 0, 0, 0, 0, 1040, 1109, 0, 0, 0, 0, 466, 866, 0, 0, 0, 0, 888, 460)
+"points": PackedVector2Array(0, 0, 0, 0, 888, 464, 0, 0, 0, 0, 1486, 465.73682, 0, 0, 0, 0, 2151, 1045.9349, 0, 0, 0, 0, 1039, 1415.9164, 0, 0, 0, 0, 723, 970.25696, 0, 0, 0, 0, 888, 460)
 }
 point_count = 6
 
@@ -19,20 +19,23 @@ position = Vector2(1882, 654)
 position = Vector2(1151, 645)
 zoom = Vector2(0.5, 0.5)
 
-[node name="Door" parent="." unique_id=1936585187 instance=ExtResource("3_kyc0r")]
+[node name="Door" parent="." unique_id=1936585187 groups=["doors"] instance=ExtResource("3_kyc0r")]
 position = Vector2(923, 0)
 rotation = 1.5707964
+scene_start = "uid://ckbcawebmyki8"
 scene_end = "uid://c3lr2j6uadjf7"
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1570313829]
+position = Vector2(0, 587.4492)
+scale = Vector2(1, 0.4756995)
 curve = SubResource("Curve2D_jywrb")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=1537474975]
 position = Vector2(888, 464)
-rotation = -0.059998572
+rotation = 0.0029043672
 
 [node name="GuardDog" parent="." unique_id=101359117 node_paths=PackedStringArray("patrol") instance=ExtResource("4_jywrb")]
-position = Vector2(1181, 371)
+position = Vector2(2220, 718)
 tracking_speed = 50
 patrol = NodePath("../Path2D/PathFollow2D")
 speed = 50

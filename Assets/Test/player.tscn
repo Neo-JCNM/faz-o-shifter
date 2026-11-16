@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://u5k8ihx0rgml"]
 
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://r7oa6bbaqq6g" path="res://Assets/Test/script/playerMove.gd" id="1_cvnsp"]
+=======
+[ext_resource type="Script" uid="uid://r7oa6bbaqq6g" path="res://Assets/Test/entity/playerMove.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://dfkk5j4a345vu" path="res://icon.svg" id="2_6t5aa"]
+>>>>>>> bc9f80e2b273ed26dfdd6d1eb52a0fb51c65164c
 [ext_resource type="Resource" uid="uid://b4kndojicnw8r" path="res://Assets/Data/ShiftAnimals/Alien.tres" id="2_t4l5d"]
 [ext_resource type="Script" uid="uid://ift5ybi70lvv" path="res://Assets/Test/script/faz_o_shifter.gd" id="3_bs8qf"]
 [ext_resource type="Texture2D" uid="uid://dmhfmgemcuwip" path="res://Assets/Graphics/Sprites/Alien/Alien.png" id="3_t4l5d"]
