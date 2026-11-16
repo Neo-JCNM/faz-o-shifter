@@ -8,12 +8,12 @@ class_name playerMove
 
 @export_group("Data")
 @export var caracteristics :  AnimalShiftSO = null;
+var originalShiftDuration;
 @export var baseCaracteristics :  AnimalShiftSO = null;
 var screenSize;
 var fazed
 signal hit;
 signal move;
-var timer = Timer.new();
 
 #endregion
 
@@ -44,8 +44,6 @@ func start(pos)-> void:
 func _process(delta: float) -> void:
 	print(caracteristics.shiftDuration)
 	velocity = Vector2.ZERO;
-	if fazed :
-		print("timer", timer.time_left)
 	if Input.is_action_pressed("moveRight"):
 		velocity.x += 1;
 	if Input.is_action_pressed("moveLeft"):
@@ -68,13 +66,15 @@ func _process(delta: float) -> void:
 	else: 
 		visible = true
 	
-	if(fazed || caracteristics.shiftDuration > 0):
-		caracteristics.shiftDuration -= 1 * delta
-	if(caracteristics.shiftDuration <= 0):
-		fazed = false
-		caracteristics = baseCaracteristics;
-		speed = caracteristics.speed;
-		$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
+	if(fazed):
+		if(caracteristics.shiftDuration > 0):
+			caracteristics.shiftDuration -= 1 * delta
+		else:
+			fazed = false
+			caracteristics.shiftDuration = originalShiftDuration;
+			caracteristics = baseCaracteristics;
+			speed = caracteristics.speed;
+			$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 		
 
 func onBodyEntered(_body):
@@ -84,6 +84,7 @@ func onBodyEntered(_body):
 
 func _on_faz():
 	speed = caracteristics.speed;
+	originalShiftDuration = caracteristics.shiftDuration;
 	fazed = true
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 	print("Fazing succeeded ! \n");

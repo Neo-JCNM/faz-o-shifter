@@ -54,11 +54,7 @@ shape = SubResource("RectangleShape2D_m0fky")
 [node name="Sprite2D" type="Sprite2D" parent="FazOobject" unique_id=1753835685]
 texture = ExtResource("4_tyx7g")
 
-[node name="Timer" type="Timer" parent="." unique_id=395329568]
-autostart = true
-
 [connection signal="move" from="." to="FazOobject" method="_on_player_move"]
 [connection signal="body_entered" from="FazOobject" to="FazOobject" method="_on_body_entered"]
 [connection signal="body_exited" from="FazOobject" to="FazOobject" method="_on_body_exited"]
 [connection signal="faz" from="FazOobject" to="." method="_on_faz"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
