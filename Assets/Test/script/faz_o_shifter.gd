@@ -13,7 +13,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position = get_global_mouse_position();
-	if(Input.is_action_pressed("shiftButton") and (fazable) and fazTarget != null):
+	if(Input.is_action_pressed("shiftButton") and (fazable) and fazTarget != null and player.cooldown <= 0):
 			print("fazing...\n");
 			player.caracteristics = fazTarget.shiftData;
 			print("fazed!\n");

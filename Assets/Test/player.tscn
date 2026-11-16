@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://u5k8ihx0rgml"]
+
+[ext_resource type="Script" uid="uid://r7oa6bbaqq6g" path="res://Assets/Test/script/playerMove.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://dfkk5j4a345vu" path="res://icon.svg" id="2_6t5aa"]
+[ext_resource type="Resource" uid="uid://b4kndojicnw8r" path="res://Assets/Data/ShiftAnimals/Alien.tres" id="2_t4l5d"]
+[ext_resource type="Script" uid="uid://ift5ybi70lvv" path="res://Assets/Test/script/faz_o_shifter.gd" id="3_bs8qf"]
+[ext_resource type="Texture2D" uid="uid://b25ec33g6edib" path="res://Assets/Graphics/Sprites/Square.png" id="4_tyx7g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpwwm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6t5aa")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
+size = Vector2(129, 130)
+
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_wpwwm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0fky"]
+size = Vector2(256, 254)
+
+[node name="Player" type="CharacterBody2D" unique_id=1684749387 groups=["player"]]
+script = ExtResource("1_cvnsp")
+caracteristics = ExtResource("2_t4l5d")
+baseCaracteristics = ExtResource("2_t4l5d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1319538491]
+sprite_frames = SubResource("SpriteFrames_wpwwm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=107987001]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_wpwwm")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CollisionShape2D" unique_id=1637714102]
+stream = SubResource("AudioStreamMP3_wpwwm")
+
+[node name="FazOobject" type="Area2D" parent="." unique_id=2017058942 node_paths=PackedStringArray("player")]
+position = Vector2(300, 300)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("3_bs8qf")
+player = NodePath("..")
+
+[node name="Detect" type="CollisionShape2D" parent="FazOobject" unique_id=2057659432]
+shape = SubResource("RectangleShape2D_m0fky")
+
+[node name="Sprite2D" type="Sprite2D" parent="FazOobject" unique_id=1753835685]
+texture = ExtResource("4_tyx7g")
+
+[connection signal="move" from="." to="FazOobject" method="_on_player_move"]
+[connection signal="body_entered" from="FazOobject" to="FazOobject" method="_on_body_entered"]
+[connection signal="body_exited" from="FazOobject" to="FazOobject" method="_on_body_exited"]
+[connection signal="faz" from="FazOobject" to="." method="_on_faz"]
