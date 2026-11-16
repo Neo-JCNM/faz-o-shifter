@@ -10,6 +10,7 @@ class_name playerMove
 @export var caracteristics :  AnimalShiftSO = null;
 var originalShiftDuration;
 @export var baseCaracteristics :  AnimalShiftSO = null;
+@export var cooldown = 5.0
 var screenSize;
 var fazed
 signal hit;
@@ -42,7 +43,9 @@ func start(pos)-> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(caracteristics.shiftDuration)
+	#print(caracteristics.shiftDuration)
+	print(cooldown)
+	cooldown -= 1 * delta
 	velocity = Vector2.ZERO;
 	if Input.is_action_pressed("moveRight"):
 		velocity.x += 1;
@@ -85,6 +88,7 @@ func onBodyEntered(_body):
 func _on_faz():
 	speed = caracteristics.speed;
 	originalShiftDuration = caracteristics.shiftDuration;
+	cooldown = originalShiftDuration + 5.0
 	fazed = true
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 	print("Fazing succeeded ! \n");
