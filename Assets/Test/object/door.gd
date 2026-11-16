@@ -16,11 +16,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is playerMove:
-		print("===DOOR===")
-		SceneMan.scene_origin  = scene_start
-		SceneMan.first_spawn = true
-		get_tree().change_scene_to_file.call_deferred(scene_end)
+	print("===DOOR===")
+	SceneMan.scene_origin  = scene_start
+	SceneMan.first_spawn = true
+	get_tree().change_scene_to_file.call_deferred(scene_end)

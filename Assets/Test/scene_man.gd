@@ -2,6 +2,7 @@ extends Node
 var scene_origin : String
 var doors : Array[Node]
 var first_spawn : bool
+var on_cooldown : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0fo0pbrxsdt6"]
 
-[ext_resource type="Script" uid="uid://r7oa6bbaqq6g" path="res://Assets/Test/script/playerMove.gd" id="1_cvnsp"]
+[ext_resource type="Script" uid="uid://r7oa6bbaqq6g" path="res://Assets/Test/entity/playerMove.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://dfkk5j4a345vu" path="res://icon.svg" id="2_6t5aa"]
 [ext_resource type="Resource" uid="uid://b4kndojicnw8r" path="res://Assets/Data/ShiftAnimals/Alien.tres" id="2_t4l5d"]
 [ext_resource type="Script" uid="uid://ift5ybi70lvv" path="res://Assets/Test/script/faz_o_shifter.gd" id="3_bs8qf"]
@@ -60,5 +60,4 @@ autostart = true
 [connection signal="move" from="." to="FazOobject" method="_on_player_move"]
 [connection signal="body_entered" from="FazOobject" to="FazOobject" method="_on_body_entered"]
 [connection signal="body_exited" from="FazOobject" to="FazOobject" method="_on_body_exited"]
-[connection signal="faz" from="FazOobject" to="." method="_on_faz"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

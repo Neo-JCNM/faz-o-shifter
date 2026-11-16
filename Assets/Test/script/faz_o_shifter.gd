@@ -13,7 +13,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position = get_global_mouse_position();
-	if(Input.is_action_pressed("shiftButton") and (fazable) and fazTarget != null and player.cooldown <= 0):
+	if(Input.is_action_pressed("shiftButton") and (fazable) and fazTarget != null and not SceneMan.on_cooldown):
 			print("fazing...\n");
 			player.caracteristics = fazTarget.shiftData;
 			print("fazed!\n");
@@ -31,7 +31,7 @@ func _on_body_entered(body: Node2D) -> void:
 	print("=== INSIDE ===\n")
 	fazable = true
 	if(body is Mob):
-		print("détection cible...\n");
+		print("détection cible...  ", body, fazable, SceneMan.on_cooldown);
 		fazTarget = body;
 
 

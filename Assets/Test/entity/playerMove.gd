@@ -10,16 +10,15 @@ class_name playerMove
 @export var caracteristics :  AnimalShiftSO = null;
 var originalShiftDuration;
 @export var baseCaracteristics :  AnimalShiftSO = null;
-@export var cooldown = 5.0
+@export var cooldown = 5
 var screenSize;
 var fazed
 signal hit;
 signal move;
-<<<<<<< HEAD
 var timer = Timer.new();
+var timer_cooldown = Timer.new()
+var cooldown_started : bool
 @onready var Doors = get_tree().get_nodes_in_group("doors")
-=======
->>>>>>> acae27a1e3befff0868099f3088af9c5353cda0b
 
 #endregion
 
@@ -27,6 +26,10 @@ var timer = Timer.new();
 #region Main Functions
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	cooldown_started = false
+	add_child(timer)
+	add_child(timer_cooldown)
+	timer_cooldown.timeout.connect(_on_timer_cooldown_timeout)
 	AlertLevel.alert_act = 0
 	screenSize = get_camera_rect()
 	hide();
@@ -54,8 +57,11 @@ func start()-> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#print(caracteristics.shiftDuration)
-	print(cooldown)
-	cooldown -= 1 * delta
+	if SceneMan.on_cooldown and not cooldown_started:
+		timer_cooldown.wait_time = cooldown
+		timer_cooldown.one_shot = true
+		timer_cooldown.start()
+		cooldown_started = true
 	velocity = Vector2.ZERO;
 	if Input.is_action_pressed("moveRight"):
 		velocity.x += 1;
@@ -78,16 +84,6 @@ func _process(delta: float) -> void:
 		visible = false
 	else: 
 		visible = true
-	
-	if(fazed):
-		if(caracteristics.shiftDuration > 0):
-			caracteristics.shiftDuration -= 1 * delta
-		else:
-			fazed = false
-			caracteristics.shiftDuration = originalShiftDuration;
-			caracteristics = baseCaracteristics;
-			speed = caracteristics.speed;
-			$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 		
 
 func onBodyEntered(_body):
@@ -97,12 +93,26 @@ func onBodyEntered(_body):
 
 func _on_faz():
 	speed = caracteristics.speed;
-	originalShiftDuration = caracteristics.shiftDuration;
-	cooldown = originalShiftDuration + 5.0
 	fazed = true
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 	print("Fazing succeeded ! \n");
+	if not SceneMan.on_cooldown:
+		timer.wait_time = caracteristics.shiftDuration
+		timer.one_shot = true
+		timer.start()
+	else: timer.wait_time = 0
 	
+func _on_timer_timeout() -> void:
+	fazed = false
+	SceneMan.on_cooldown = true
+	caracteristics = baseCaracteristics;
+	speed = caracteristics.speed;
+	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
+	
+func _on_timer_cooldown_timeout() -> void:
+	SceneMan.on_cooldown = false
+	cooldown_started = false
+	print("Off cooldown",SceneMan.on_cooldown)
 
 
 
