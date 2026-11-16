@@ -43,7 +43,8 @@ visibility_layer = 7
 position = Vector2(46.00006, 285)
 scale = Vector2(1.2, 1.2)
 
-[node name="Door" parent="." unique_id=1936585187 instance=ExtResource("1_lm5rs")]
+[node name="Door" parent="." unique_id=1936585187 groups=["doors"] instance=ExtResource("1_lm5rs")]
 position = Vector2(257.00012, 646.99994)
 rotation = -1.5707964
+scene_start = "uid://c3lr2j6uadjf7"
 scene_end = "uid://ckbcawebmyki8"

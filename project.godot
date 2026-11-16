@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 AlertMan="*uid://b1w4ac8uei7r5"
 AlertLevel="*uid://mcq38k30wgv0"
+SceneMan="*uid://bt2o6hvrlguvp"
 
 [display]
 

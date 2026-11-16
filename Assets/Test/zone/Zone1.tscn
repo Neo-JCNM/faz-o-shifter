@@ -23,9 +23,10 @@ patrol = NodePath("../Path2D/PathFollow2D")
 position = Vector2(1151, 645)
 zoom = Vector2(0.5, 0.5)
 
-[node name="Door" parent="." unique_id=1936585187 instance=ExtResource("3_kyc0r")]
+[node name="Door" parent="." unique_id=1936585187 groups=["doors"] instance=ExtResource("3_kyc0r")]
 position = Vector2(923, 0)
 rotation = 1.5707964
+scene_start = "uid://ckbcawebmyki8"
 scene_end = "uid://c3lr2j6uadjf7"
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1570313829]

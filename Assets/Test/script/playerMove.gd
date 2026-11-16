@@ -14,9 +14,9 @@ var fazed
 signal hit;
 signal move;
 var timer = Timer.new();
+@onready var Doors = get_tree().get_nodes_in_group("doors")
 
 #endregiontyy
-
 
 
 #region Main Functions
@@ -25,8 +25,15 @@ func _ready() -> void:
 	AlertLevel.alert_act = 0
 	screenSize = get_camera_rect()
 	hide();
-	start(Vector2.ZERO);
+	SceneMan.doors = Doors
+	start();
+	if SceneMan.first_spawn:
+		print(Doors)
+		position = SceneMan._update_door().global_position
+	else: 
+		position = Vector2.ZERO
 	caracteristics = baseCaracteristics
+	
 	
 func get_camera_rect() -> Rect2:
 	var cam = get_viewport().get_camera_2d()
@@ -34,8 +41,7 @@ func get_camera_rect() -> Rect2:
 	var center = cam.get_screen_center_position()
 	return Rect2(center - size / 2.0, size)
 
-func start(pos)-> void:
-	position = pos;
+func start()-> void:
 	position.clamp(screenSize.position, screenSize.end);
 	show();
 	$CollisionShape2D.disabled = false;
