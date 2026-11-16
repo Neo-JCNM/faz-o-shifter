@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://d1dkfs8ycypiv"]
+
+[ext_resource type="Script" uid="uid://c4cmnvl3b6m21" path="res://Assets/Scripts/GuardDog.gd" id="1_vrsb6"]
+[ext_resource type="Texture2D" uid="uid://dfkk5j4a345vu" path="res://icon.svg" id="2_vrsb6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
+size = Vector2(127, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpwwm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vrsb6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wpwwm"]
+radius = 989.13763
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0fky"]
+size = Vector2(179.82608, 228.21739)
+
+[node name="GuardDog" type="CharacterBody2D" unique_id=101359117]
+scale = Vector2(1.15, 1.15)
+script = ExtResource("1_vrsb6")
+tracking_speed = 200
+chase_speed = 550
+metadata/_custom_type_script = "uid://c6cedcmgsqj7x"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1383402164]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_wpwwm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=695958373]
+sprite_frames = SubResource("SpriteFrames_wpwwm")
+
+[node name="SmellArea" type="Area2D" parent="." unique_id=73333753]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmellArea" unique_id=178567421]
+shape = SubResource("CircleShape2D_wpwwm")
+
+[node name="VisionArea" type="Area2D" parent="." unique_id=2102813776]
+
+[node name="Polygon2D" type="Polygon2D" parent="VisionArea" unique_id=567727952]
+modulate = Color(0, 0.84705883, 0.22745098, 0.5019608)
+show_behind_parent = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea" unique_id=983887187]
+position = Vector2(64, -20.723)
+scale = Vector2(1.2310268, 1.5291878)
+polygon = PackedVector2Array(-191.70988, 384, 112.913864, 382, -1.1301956, -4.498087, -54.814617, -34.033752, -101.435295, -7.8735924)
+
+[node name="KillZone" type="Area2D" parent="." unique_id=1037889301]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=1970083781]
+position = Vector2(-2.086956, 31.108698)
+shape = SubResource("RectangleShape2D_m0fky")
+
+[node name="BarkTimer" type="Timer" parent="." unique_id=2062731532]
+wait_time = 2.0
+one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=114293195]
+
+[connection signal="body_entered" from="SmellArea" to="." method="_on_smell_area_body_entered"]
+[connection signal="body_exited" from="SmellArea" to="." method="_on_smell_area_body_exited"]
+[connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]
+[connection signal="body_exited" from="VisionArea" to="." method="_on_vision_area_body_exited"]
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]

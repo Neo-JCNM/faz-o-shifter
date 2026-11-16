@@ -8,7 +8,7 @@ class_name playerMove
 
 @export_group("Data")
 @export var caracteristics :  AnimalShiftSO = null;
-var originalShiftDuration;
+var shiftCount;
 @export var baseCaracteristics :  AnimalShiftSO = null;
 @export var cooldown = 5.0
 var screenSize;
@@ -41,11 +41,7 @@ func start(pos)-> void:
 	show();
 	$CollisionShape2D.disabled = false;
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#print(caracteristics.shiftDuration)
-	print(cooldown)
-	cooldown -= 1 * delta
+func _physics_process(delta: float) -> void:
 	velocity = Vector2.ZERO;
 	if Input.is_action_pressed("moveRight"):
 		velocity.x += 1;
@@ -64,17 +60,21 @@ func _process(delta: float) -> void:
 	move.emit(velocity*delta);
 	position += velocity * delta;
 	position = position.clamp(screenSize.position, screenSize.end);
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	#print(caracteristics.shiftDuration)
+	print(cooldown)
+	cooldown -= 1 * delta
 	if AlertLevel.is_hiding:
 		visible = false
 	else: 
 		visible = true
 	
 	if(fazed):
-		if(caracteristics.shiftDuration > 0):
-			caracteristics.shiftDuration -= 1 * delta
+		if(shiftCount > 0):
+			shiftCount -= 1 * delta
 		else:
 			fazed = false
-			caracteristics.shiftDuration = originalShiftDuration;
 			caracteristics = baseCaracteristics;
 			speed = caracteristics.speed;
 			$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
@@ -86,9 +86,11 @@ func onBodyEntered(_body):
 	#$CollisionShape2D.set_deferred("disabled", true);
 
 func _on_faz():
+	if (caracteristics.collider != null):
+		$CollisionShape2D.shape = caracteristics.collider
 	speed = caracteristics.speed;
-	originalShiftDuration = caracteristics.shiftDuration;
-	cooldown = originalShiftDuration + 5.0
+	shiftCount = caracteristics.shiftDuration;
+	cooldown = shiftCount + 5.0
 	fazed = true
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
 	print("Fazing succeeded ! \n");

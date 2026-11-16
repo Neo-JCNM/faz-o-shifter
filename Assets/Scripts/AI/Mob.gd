@@ -40,6 +40,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	execute_base_ai(delta);
+	
+func execute_base_ai(delta: float) -> void:
 	var direction
 	var rotation_direction
 	if AlertLevel.alert_act == 0:
