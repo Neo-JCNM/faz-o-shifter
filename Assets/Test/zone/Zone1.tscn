@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ckbcawebmyki8"]
 
-[ext_resource type="PackedScene" uid="uid://c0fo0pbrxsdt6" path="res://Assets/Test/player.tscn" id="1_ulhmy"]
-[ext_resource type="PackedScene" uid="uid://cx81jfmew6spq" path="res://Assets/Test/Mob.tscn" id="2_kyc0r"]
+[ext_resource type="PackedScene" uid="uid://c0fo0pbrxsdt6" path="res://Assets/Test/entity/player.tscn" id="1_ulhmy"]
+[ext_resource type="PackedScene" uid="uid://cx81jfmew6spq" path="res://Assets/Test/entity/Mob.tscn" id="2_kyc0r"]
 [ext_resource type="PackedScene" uid="uid://v2je86htbedh" path="res://Assets/Test/object/door.tscn" id="3_kyc0r"]
 
 [sub_resource type="Curve2D" id="Curve2D_jywrb"]
@@ -26,8 +26,6 @@ zoom = Vector2(0.5, 0.5)
 [node name="Door" parent="." unique_id=1936585187 instance=ExtResource("3_kyc0r")]
 position = Vector2(923, 0)
 rotation = 1.5707964
-closed = false
-id_key_needed = 0
 scene_end = "uid://c3lr2j6uadjf7"
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1570313829]

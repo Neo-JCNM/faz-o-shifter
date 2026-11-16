@@ -5,6 +5,7 @@ extends Node
 @export var id_key_needed : int
 
 @export_group("Changement Scene")
+@export_file("*.tscn") var scene_start : String
 @export_file("*.tscn") var scene_end : String
 
 # Called when the node enters the scene tree for the first time.
