@@ -57,7 +57,7 @@ func start()-> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#print(caracteristics.shiftDuration)
-	if SceneMan.on_cooldown and not cooldown_started:
+	if SceneMan.on_cooldown and not cooldown_started and caracteristics == baseCaracteristics:
 		timer_cooldown.wait_time = cooldown
 		timer_cooldown.one_shot = true
 		timer_cooldown.start()
@@ -91,16 +91,10 @@ func onBodyEntered(_body):
 	hit.emit();
 	#$CollisionShape2D.set_deferred("disabled", true);
 
+
+
 func _on_faz():
-	speed = caracteristics.speed;
-	fazed = true
-	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
-	print("Fazing succeeded ! \n");
-	if not SceneMan.on_cooldown:
-		timer.wait_time = caracteristics.shiftDuration
-		timer.one_shot = true
-		timer.start()
-	else: timer.wait_time = 0
+	pass
 	
 func _on_timer_timeout() -> void:
 	fazed = false
@@ -117,3 +111,13 @@ func _on_timer_cooldown_timeout() -> void:
 
 
 #endregion
+
+
+func _on_faz_oobject_faz() -> void:
+	speed = caracteristics.speed;
+	fazed = true
+	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
+	timer.wait_time =  15 #caracteristics.shiftDuration
+	timer.one_shot = true
+	timer.start()
+	print("Fazing succeeded ! \n", timer.time_left);

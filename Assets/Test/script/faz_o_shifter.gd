@@ -9,6 +9,8 @@ signal faz;
 
 func _ready() -> void:
 	top_level = true;
+	player = get_tree().get_first_node_in_group("player")
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -17,8 +19,7 @@ func _process(delta: float) -> void:
 			print("fazing...\n");
 			player.caracteristics = fazTarget.shiftData;
 			print("fazed!\n");
-			faz.emit();
-	
+			faz.emit();	
 
 
 func _on_player_move(value: Vector2) -> void:

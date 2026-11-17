@@ -64,6 +64,7 @@ debug_lines = true
 metadata/_custom_type_script = "uid://bo744wpycscqd"
 
 [node name="AreaVision" type="Area2D" parent="." unique_id=1046288594]
+light_mask = 0
 monitorable = false
 
 [node name="Polygon2D" type="Polygon2D" parent="AreaVision" unique_id=1224344675]
