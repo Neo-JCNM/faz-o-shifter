@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d1dkfs8ycypiv"]
 
 [ext_resource type="Script" uid="uid://c4cmnvl3b6m21" path="res://Assets/Scripts/GuardDog.gd" id="1_vrsb6"]
-[ext_resource type="Texture2D" uid="uid://dfkk5j4a345vu" path="res://icon.svg" id="2_vrsb6"]
+[ext_resource type="Texture2D" uid="uid://cx7prt1scgyc8" path="res://Assets/Graphics/Sprites/Chien/Chien.png" id="2_vrsb6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wpwwm"]
 size = Vector2(127, 128)
@@ -35,6 +35,9 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_wpwwm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=695958373]
+position = Vector2(-1.7391307, -3.8146973e-06)
+rotation = -3.1415927
+scale = Vector2(0.72246045, 0.8201324)
 sprite_frames = SubResource("SpriteFrames_wpwwm")
 
 [node name="SmellArea" type="Area2D" parent="." unique_id=73333753]

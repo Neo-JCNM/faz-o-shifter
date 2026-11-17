@@ -5,12 +5,13 @@ class_name playerMove
 #region Variables
 @export_group("Physic")
 @export var speed = 400;
+@export var shake = -15
 
 @export_group("Data")
 @export var caracteristics :  AnimalShiftSO = null;
 var shiftCount;
 @export var baseCaracteristics :  AnimalShiftSO = null;
-@export var cooldown = 5
+@export var cooldown = 5.0
 var screenSize;
 var fazed
 signal hit;
@@ -68,8 +69,13 @@ func _physics_process(delta: float) -> void:
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed;
 		$AnimatedSprite2D.play();
+		#$AnimatedSprite2D.rotation = shake
+		#shake = -2* shake 
+		
 	else:
 		$AnimatedSprite2D.stop();
+		#$AnimatedSprite2D.rotation= 0
+
 	move.emit(velocity*delta);
 	position += velocity * delta;
 	position = position.clamp(screenSize.position, screenSize.end);
@@ -96,8 +102,6 @@ func _process(delta: float) -> void:
 			caracteristics = baseCaracteristics;
 			speed = caracteristics.speed;
 			$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
-			
-	# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func onBodyEntered(_body):
 	hide();
@@ -130,7 +134,5 @@ func _on_timer_cooldown_timeout() -> void:
 	SceneMan.on_cooldown = false
 	cooldown_started = false
 	print("Off cooldown",SceneMan.on_cooldown)
-
-
 
 #endregion

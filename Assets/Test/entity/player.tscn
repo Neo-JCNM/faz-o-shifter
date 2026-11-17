@@ -26,6 +26,7 @@ size = Vector2(100, 121)
 size = Vector2(256, 254)
 
 [node name="Player" type="CharacterBody2D" unique_id=1684749387 groups=["player"]]
+platform_floor_layers = 4294950911
 script = ExtResource("1_cvnsp")
 caracteristics = ExtResource("2_t4l5d")
 baseCaracteristics = ExtResource("2_t4l5d")
