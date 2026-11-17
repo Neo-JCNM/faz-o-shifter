@@ -32,7 +32,6 @@ func randomDirection()-> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	AlertLevel.alert_act = 0
 	screenSize = get_viewport_rect().size;
 	counter = 0;
 	patrol.rotates = true

@@ -31,7 +31,6 @@ func _ready() -> void:
 	add_child(timer_cooldown)
 	timer_trans.timeout.connect(_on_timer_trans_timeout)
 	timer_cooldown.timeout.connect(_on_timer_cooldown_timeout)
-	AlertLevel.alert_act = 0
 	screenSize = get_camera_rect()
 	hide();
 	SceneMan.doors = Doors
