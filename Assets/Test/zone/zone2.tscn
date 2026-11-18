@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://d2gywn6c5xfh1"]
+
+[ext_resource type="PackedScene" uid="uid://u5k8ihx0rgml" path="res://Assets/Test/player.tscn" id="1_1fqal"]
+[ext_resource type="PackedScene" uid="uid://dwel8ipaoo1xk" path="res://Assets/Test/object/hiding_spot.tscn" id="2_j3mb8"]
+[ext_resource type="PackedScene" uid="uid://cx81jfmew6spq" path="res://Assets/Test/entity/Mob.tscn" id="3_40qy7"]
+[ext_resource type="PackedScene" uid="uid://v2je86htbedh" path="res://Assets/Test/object/door.tscn" id="4_mfuie"]
+
+[sub_resource type="Curve2D" id="Curve2D_fk4a2"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 481.5039, 542, 0, 0, 0, 0, 491, 171, 0, 0, 0, 0, 148, 171, 0, 0, 0, 0, 144, 540, 0, 0, 0, 0, 482, 544)
+}
+point_count = 5
+
+[node name="Zone2" type="Node2D" unique_id=121348219]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=57772533]
+position = Vector2(579, 324)
+
+[node name="Door" parent="." unique_id=1936585187 groups=["doors"] instance=ExtResource("4_mfuie")]
+position = Vector2(514.99994, 648)
+rotation = -1.5707964
+scale = Vector2(0.4, 0.4)
+scene_start = "uid://d2gywn6c5xfh1"
+scene_end = "uid://c3lr2j6uadjf7"
+
+[node name="Player" parent="." unique_id=1684749387 instance=ExtResource("1_1fqal")]
+position = Vector2(1.0000305, 22)
+scale = Vector2(0.2, 0.2)
+
+[node name="HidingSpot" parent="." unique_id=973519986 instance=ExtResource("2_j3mb8")]
+position = Vector2(344, 227)
+scale = Vector2(0.5, 2.5)
+
+[node name="HidingSpot2" parent="." unique_id=1222055796 instance=ExtResource("2_j3mb8")]
+position = Vector2(760, 225)
+scale = Vector2(0.5, 2.5)
+
+[node name="PigTest" parent="." unique_id=1001888464 node_paths=PackedStringArray("patrol") instance=ExtResource("3_40qy7")]
+position = Vector2(182, 161)
+scale = Vector2(0.08, 0.08)
+patrol = NodePath("../Path2D2/PathFollow2D")
+
+[node name="PigTest2" parent="." unique_id=149614118 node_paths=PackedStringArray("patrol") instance=ExtResource("3_40qy7")]
+position = Vector2(990, 187)
+scale = Vector2(0.08, 0.08)
+patrol = NodePath("../Path2D/PathFollow2D")
+
+[node name="Path2D" type="Path2D" parent="." unique_id=1436075759]
+position = Vector2(118.06286, 0)
+scale = Vector2(0.73714286, 1)
+curve = SubResource("Curve2D_fk4a2")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=1200054719]
+position = Vector2(481.5039, 542)
+rotation = -1.545206
+
+[node name="Path2D2" type="Path2D" parent="." unique_id=1680480490]
+position = Vector2(555, 11)
+scale = Vector2(0.73714286, 1)
+curve = SubResource("Curve2D_fk4a2")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D2" unique_id=1081989078]
+position = Vector2(481.5039, 542)
+rotation = -1.545206

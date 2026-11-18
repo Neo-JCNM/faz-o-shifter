@@ -7,6 +7,7 @@ var timer = Timer.new()
 var is_hiding = false
 
 func _ready():
+	timer.wait_time = 3
 	alert_act = 0
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)

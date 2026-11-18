@@ -1,8 +1,16 @@
 [gd_scene format=3 uid="uid://dvcs4e0ykp52u"]
 
+[ext_resource type="Script" uid="uid://cuyf5oxidvalr" path="res://Assets/Test/UI/alert_bar.gd" id="1_ceh5p"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8g475"]
 bg_color = Color(0.7829158, 0.45298994, 0.81981623, 1)
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgd7a"]
+bg_color = Color(0, 0.7239218, 0.24672806, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6l2oo"]
+bg_color = Color(0.89300424, 0, 0.17865306, 1)
 
 [node name="Detection" type="Control" unique_id=1030238906]
 layout_mode = 3
@@ -24,3 +32,14 @@ offset_left = 377.0
 offset_right = 716.0
 offset_bottom = 27.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_8g475")
+
+[node name="AlertBar" type="ProgressBar" parent="." unique_id=571578280]
+layout_mode = 0
+offset_left = 1061.0
+offset_top = 4.0
+offset_right = 1142.0
+offset_bottom = 87.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tgd7a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6l2oo")
+show_percentage = false
+script = ExtResource("1_ceh5p")
