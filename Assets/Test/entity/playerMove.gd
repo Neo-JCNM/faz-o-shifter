@@ -115,6 +115,7 @@ func _on_faz_oobject_faz() -> void:
 	timer_trans.wait_time =  caracteristics.shiftDuration
 	timer_trans.one_shot = true
 	timer_trans.start()
+	$CollisionShape2D/AudioStreamPlayer2D.play();
 	print("Fazing succeeded ! \n", timer_trans.time_left)
 
 
