@@ -19,13 +19,15 @@ var timer_trans = Timer.new();
 var timer_cooldown = Timer.new()
 var cooldown_started : bool
 @onready var Doors = get_tree().get_nodes_in_group("doors")
-
+@onready var Cooldown_Bar = Detection.get_node("ProgressBarCooldown")
+@onready var trans_Bar = Detection.get_node("ProgressBarTrans")
 #endregion
 
 
 #region Main Functions
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	trans_Bar.hide()
 	cooldown_started = false
 	add_child(timer_trans)
 	add_child(timer_cooldown)
@@ -63,6 +65,8 @@ func _process(delta: float) -> void:
 		timer_cooldown.start()
 		cooldown_started = true
 	velocity = Vector2.ZERO;
+	Cooldown_Bar.value = (timer_cooldown.time_left * 100) / cooldown
+	trans_Bar.value = (timer_trans.time_left) 
 	if Input.is_action_pressed("moveRight"):
 		velocity.x += 1;
 	if Input.is_action_pressed("moveLeft"):
@@ -99,6 +103,7 @@ func _on_timer_trans_timeout() -> void:
 	caracteristics = baseCaracteristics;
 	speed = caracteristics.speed;
 	$AnimatedSprite2D.sprite_frames = caracteristics.sprite;
+	trans_Bar.hide()
 	print("UNFAZED")
 	
 func _on_timer_cooldown_timeout() -> void:
@@ -114,6 +119,8 @@ func _on_faz_oobject_faz() -> void:
 	timer_trans.wait_time =  caracteristics.shiftDuration
 	timer_trans.one_shot = true
 	timer_trans.start()
+	trans_Bar.show()
+	trans_Bar.max_value = timer_trans.wait_time
 	print("Fazing succeeded ! \n", timer_trans.time_left)
 
 

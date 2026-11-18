@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dvcs4e0ykp52u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8g475"]
+bg_color = Color(0.7829158, 0.45298994, 0.81981623, 1)
+corner_detail = 5
+
+[node name="Detection" type="Control" unique_id=1030238906]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBarCooldown" type="ProgressBar" parent="." unique_id=349106388]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 263.0
+fill_mode = 3
+
+[node name="ProgressBarTrans" type="ProgressBar" parent="." unique_id=26747335]
+layout_mode = 0
+offset_left = 377.0
+offset_right = 716.0
+offset_bottom = 27.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_8g475")
